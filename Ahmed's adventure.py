@@ -77,6 +77,9 @@ def enter_cave():
         choice = input("your choice (yes/no):")
         if choice == "yes":
             start_game()
+            import random
+            random_monsters = ["dragon","mummy","zombie","vampire"]
+            random_monster = random.choice(random_monsters)
         elif choice == "no":
             print("thank you for playing")
             exit()
