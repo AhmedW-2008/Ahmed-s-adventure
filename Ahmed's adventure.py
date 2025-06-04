@@ -2,8 +2,11 @@ import time
 
 # Ahmed's adventure game
 def start_game():
-    time.sleep(1)
+    
     print("welcome to your adventure")
+    if __name__ == "__ahmed,s adventure__":
+    start_game(ahmed,s adventure) 
+
     time.sleep(2)
     print("wake up in a garden and you don't remember how you got here")
     print("you have to choose one of two choices")
@@ -76,6 +79,10 @@ def enter_cave():
         print("would you like to Try again?")
         choice = input("your choice (yes/no):")
         if choice == "yes":
+            def play_again():
+    while True
+            print("Restarting the game")
+            time.sleep(1)
             start_game()
             import random
             random_monsters = ["dragon","mummy","zombie","vampire"]
@@ -85,4 +92,5 @@ def enter_cave():
             exit()
         else:
             print("Invalid choice. Game over.")
+
 print ("end of the game")
