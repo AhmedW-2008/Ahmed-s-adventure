@@ -1,6 +1,4 @@
 import time
-
-# Ahmed's adventure game
 def start_game():
     
     print("welcome to your adventure")
