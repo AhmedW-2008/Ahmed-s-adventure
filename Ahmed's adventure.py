@@ -1,3 +1,4 @@
+
 import time
 # I used the time module to add delays to make game good
 def start_game():
@@ -54,20 +55,22 @@ def enter_house():
             global hearts
             hearts -= 1
             print(f"Hearts left: {hearts} hearts")
-        
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
-                while True:
-                    choice = input("Would you like to play again? (Yes/No): ")
-                    if choice() == "Yes":
-                        start_game()
-                        break
-                    elif choice() == "No":
-                        print("Thank you for playing!")
-                        exit()
-                    else:
-                        print("Invalid choice. Please enter Yes or No.")
-                        return
+            elif hearts > 0:
+                print("You're still alive!")
+            
+            while True:
+                choice = input("Would you like to play again? (Yes/No): ")
+                if choice == "Yes":
+                    start_game()
+                    break
+                elif choice == "No":
+                    print("Thank you for playing!")
+                    exit()
+                else:
+                    print("Invalid choice. Please enter Yes or No.")
+                    return
         elif choice == "4":
          print("You defended yourself and escaped to another place.")
         print("You reached an island with a treasure guarded by guardians.")
@@ -101,8 +104,6 @@ def enter_house():
         
             return      
             # Simulate attack with its results and escape with scores and lives and loop for choices
-# Removed invalid else statement that was not attached to any if or loop
-
 def enter_cave():
     print("You found your friend Amoro who came by time machine.")
     print("He says you must find the time machine to go back.")
@@ -143,13 +144,13 @@ def enter_cave():
             print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
-            else:
+            elif hearts > 0:
                 print("You're still alive!")
             return
         #it shows that monster caught you and you lost one life and returns .if your lives are 0, the game ends
         else:
             print("Invalid choice. Try again.")
-            continue
+            return
         while True:
             print("would you like to try again?")
             choice = input("your choice (Yes/No):")
@@ -158,14 +159,14 @@ def enter_cave():
                 import random
                 random_monsters = ["dragon", "mummy", "zombie", "vampire"]
                 random_monsters = random.choice(random_monsters)
-                return
+                print(f"You encountered a {random_monsters} in the cave!")
             #i used random module to choose a random monster if the player chooses to try again
             elif choice == "No":
                 print("thank you for playing")
                 exit()
             else:
                 print("Invalid choice. Please enter Yes or No.")
-                continue
+                return
 # This loop will keep asking the player for a valid choice.if the player chooses to try again, the game restarts with random monsters else you recieve thank you for playing.
 if __name__ == "__main__":
     start_game()
