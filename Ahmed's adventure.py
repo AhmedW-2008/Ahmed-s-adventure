@@ -22,10 +22,11 @@ def start_game():
     elif Answer == "2":
         enter_cave()
     else:
-        print("Invalid choice. restart")
+        print("invalid choice try again")
         start_game()
+    
 def enter_house():
-    global hearts,score
+    global hearts, score
     print("You entered the house and found a person holding a knife.")
     print("You have two choices:")
     print("3 - Attack him")
@@ -67,8 +68,8 @@ def enter_house():
                     print("Thank you for playing!")
                     exit()
                 else:
-                    print("Invalid choice. restart")
-                    exit()
+                 print ("invalid choice try again")
+                start_game()
         elif choice == "4":
          print("You defended yourself and escaped to another place.")
         print("You reached an island with a treasure guarded by guardians.")
@@ -100,7 +101,7 @@ def enter_house():
             elif hearts > 0:
                 print("You're still alive!")
             else:  
-                print ("invalid choice. restart")
+                print ("invalid choice.try again")
                 start_game()
             # Simulate attack with its results and escape with scores and lives and loop for choices
 
@@ -150,7 +151,7 @@ def enter_cave():
             
         #it shows that monster caught you and you lost one life and returns .if your lives are 0, the game ends
         else:  
-                print ("invalid choice. restart")
+                print ("invalid choice.try again")
                 start_game()
         while True:
             print("would you like to try again?")
