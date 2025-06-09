@@ -1,7 +1,12 @@
-
 import time
-# I used the time module to add delays to make game good
+import random
+# I used the time and random modules to make game good
+hearts = 3
+score = 0
 def start_game():
+    global hearts, score
+    hearts = 3  # number of hearts at the beginning
+    score = 0  #  score at the beginning
     #this function starts the game and introduces the player to the adventure
     print("Welcome to your adventure!")
     time.sleep(2)
@@ -9,25 +14,17 @@ def start_game():
     print("You have to choose one of two choices:")
     print("1 - shows a house which is very old and has a person lives in it")
     print("2 - shows you a dark cave which has mysterious things ")
-# Player starts with 3 hearts
-hearts = 3
-# Function to show hearts
-def show_hearts():
-    global hearts
-    hearts = 3  # Reset hearts at the beginning
-    print("you have 3 hearts in your game")
-    print(f"You have {hearts}.")
     Answer = input("What is your choice? (1 = house / 2 = cave): ")
     #these are the choices the player can make
     if Answer == "1":
         enter_house()
-        Answer = {'counter':5}
     elif Answer == "2":
         enter_cave()
     else:
         print("Invalid choice. Please enter 1 or 2.")
         return
 def enter_house():
+    global hearts,score
     print("You entered the house and found a person holding a knife.")
     print("You have two choices:")
     print("3 - Attack him")
@@ -52,13 +49,13 @@ def enter_house():
                 break
         elif score < 15: 
             print("you attacked the person, but he was stronger and you lost")
-            global hearts
             hearts -= 1
             print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
             elif hearts > 0:
                 print("You're still alive!")
+            
             
             while True:
                 choice = input("Would you like to play again? (Yes/No): ")
@@ -104,10 +101,14 @@ def enter_house():
         
             return      
             # Simulate attack with its results and escape with scores and lives and loop for choices
+
+
 def enter_cave():
+    global hearts, score
     print("You found your friend Amoro who came by time machine.")
     print("He says you must find the time machine to go back.")
     print("You face a monster in the cave.")
+    monster = random.choice(["dragon", "mummy", "zombie", "vampire"])
     print("7 - Fight the monster")
     print("8 - Run away")
     #this function is for the player to enter the cave and face a monster.you can either fight it or run away
@@ -138,7 +139,6 @@ def enter_cave():
                 return
             #simulate fighting the monster with a function and shows the score
         elif choice == "8":
-            choice = {'counter':5}
             hearts -= 1
             print("You ran but the monster caught you. You lost.")
             print(f"Hearts left: {hearts} hearts")
@@ -156,11 +156,6 @@ def enter_cave():
             choice = input("your choice (Yes/No):")
             if choice == "Yes":
                 start_game()
-                import random
-                random_monsters = ["dragon", "mummy", "zombie", "vampire"]
-                random_monsters = random.choice(random_monsters)
-                print(f"You encountered a {random_monsters} in the cave!")
-            #i used random module to choose a random monster if the player chooses to try again
             elif choice == "No":
                 print("thank you for playing")
                 exit()
