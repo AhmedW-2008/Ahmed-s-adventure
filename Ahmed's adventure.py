@@ -3,6 +3,13 @@ import random
 # I used the time and random modules to make game good
 hearts = 3
 score = 0
+def get_valid_input(prompt, valid_choices):
+    choice = input(prompt).strip()
+    while choice not in valid_choices:
+        print("Invalid choice. Please try again.")
+        choice = input(prompt).strip()
+    return choice
+
 def start_game():
     global hearts, score
     hearts = 3  # number of hearts at the beginning
@@ -14,16 +21,15 @@ def start_game():
     print("You have to choose one of two choices:")
     print("1 - shows a house which is very old and has a person lives in it")
     print("2 - shows you a dark cave which has mysterious things ")
-    Answer = input("What is your choice? (1 = house / 2 = cave): ")
+    Answer = get_valid_input("What is your choice? (1 = house / 2 = cave):",["1","2"])
     #these are the choices the player can make
     
     if Answer == "1":
         enter_house()
     elif Answer == "2":
         enter_cave()
-    else:
-        print("invalid choice try again")
-        start_game()
+        else:
+        print("try again")
     
 def enter_house():
     global hearts, score
@@ -34,7 +40,7 @@ def enter_house():
     #this function is for the player to enter the house and face a person with a knife.you can either attack him or defend yourself
     attack_counter = 0
     while True:
-        choice = input("Your choice (3 = attack / 4 = defend): ")
+        choice = get_valid_input("Your choice (3 = attack / 4 = defend): ",["3","4"])
         if choice == "3":
             # Simulate attack
             def attack():
@@ -55,21 +61,12 @@ def enter_house():
             print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
-            elif hearts > 0:
+                return
+            else:
                 print("You're still alive!")
-            
-            
-            while True:
-                choice = input("Would you like to play again? (Yes/No): ")
-                if choice == "Yes":
-                    start_game()
-                    break
-                elif choice == "No":
-                    print("Thank you for playing!")
-                    exit()
-                else:
-                 print ("invalid choice try again")
-                start_game()
+                play_again()
+                return
+                
         elif choice == "4":
          print("You defended yourself and escaped to another place.")
         print("You reached an island with a treasure guarded by guardians.")
@@ -78,7 +75,7 @@ def enter_house():
         #simulate defending yourself and escaping to an island with a treasure guarded by guardians and you can either join them or attack them
         attack_state = {'counter': 0}
         while True:
-            choice = input("Your choice (5 = join / 6 = attack): ")
+            choice = get_valid_input("Your choice (5 = join / 6 = attack): ")
             if choice == "5":
                 print("You joined them and stole the treasure. You won!")
                 score = attack_state['counter'] = 20
@@ -92,17 +89,16 @@ def enter_house():
                     score = attack_state['counter'] = 20
                     print(f"Total score: {score}")
                     break
-                elif score < 15: 
+                else: 
                     print("You attacked the guardians, but they were too strong and you lost.")
                     hearts -= 1
                     print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
-            elif hearts > 0:
-                print("You're still alive!")
-            else:  
-                print ("invalid choice.try again")
-                start_game()
+                return
+            else:
+                print("You're still alive")
+                return
             # Simulate attack with its results and escape with scores and lives and loop for choices
 
 
@@ -112,11 +108,12 @@ def enter_cave():
     print("He says you must find the time machine to go back.")
     print("You face a monster in the cave.")
     monster = random.choice(["dragon", "mummy", "zombie", "vampire"])
+    print(f"You encounter a {monster}!")
     print("7 - Fight the monster")
     print("8 - Run away")
     #this function is for the player to enter the cave and face a monster.you can either fight it or run away
     while True:
-        choice = input("Your choice (7 = fight / 8 = run): ")
+        choice = get_valid_input("Your choice (7 = fight / 8 = run): ")
         if choice == "7":
             attack_counter = 0
             def attack():
@@ -130,15 +127,18 @@ def enter_cave():
                 hearts = 3  # Reset hearts after winning
                 score = attack_counter = 20
                 print(f"Total score: {score}")
-                break
-            if score < 15:
+                return
+            else:
                 print("You fought the monster, but it was too strong and you lost.")
                 hearts -= 1
                 print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
+                return
             else:
                 print("You're still alive!")
+                play_again()
+                return
             #simulate fighting the monster with a function and shows the score
         elif choice == "8":
             hearts -= 1
@@ -146,24 +146,17 @@ def enter_cave():
             print(f"Hearts left: {hearts} hearts")
             if hearts <= 0:
                 print("You lost all your hearts. Game Over!")
-            elif hearts > 0:
+            else:
                 print("You're still alive!")
+                return
             
         #it shows that monster caught you and you lost one life and returns .if your lives are 0, the game ends
-        else:  
-                print ("invalid choice.try again")
-                start_game()
-        while True:
-            print("would you like to try again?")
-            choice = input("your choice (Yes/No):")
-            if choice == "Yes":
-                start_game()
-            elif choice == "No":
-                print("thank you for playing")
-                exit()
-            else:
-                print("Invalid choice. restart.")
-                exit()
-# This loop will keep asking the player for a valid choice.if the player chooses to try again, the game restarts with random monsters else you recieve thank you for playing.
+def play_again():
+    choice = get_valid_input("Would you like to play again? (Yes/No): ", ["Yes", "No"])
+    if choice == "Yes":
+        start_game()
+    else:
+        print("Thank you for playing!")
+        exit()
 if __name__ == "__main__":
     start_game()
